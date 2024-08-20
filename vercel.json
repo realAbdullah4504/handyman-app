@@ -1,0 +1,12 @@
+{
+	"crons": [
+		{
+			"path": "/api/subscription/send_remainder_email/",
+			"schedule": "00 00 * * *"
+		},
+		{
+			"path": "/api/subscription/expire_subscription/",
+			"schedule": "02 00 * * *"
+		}
+	]
+}
