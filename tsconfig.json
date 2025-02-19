@@ -24,6 +24,6 @@
 		"**/*.tsx",
 		"node_modules/index.ts",
 		"pages/sitemap.xml.ts"
-	],
+, "scripts/siteMapsCraftsmanNearMe.ts"	],
 	"exclude": ["node_modules"]
 }
