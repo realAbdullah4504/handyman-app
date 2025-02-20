@@ -31,7 +31,7 @@ export default function Home() {
           <Hero />
         </div>
         <div className="bg-mainBackground">
-          <div className="py-3 mt-10">
+          <div className="py-3 mt-10 xl:px-[150px]">
             <Services />
             <Steps isShowHeadingText={true} />
             <NewListedOrder />

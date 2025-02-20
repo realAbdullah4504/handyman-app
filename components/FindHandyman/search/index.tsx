@@ -4,68 +4,70 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ServicePopUpPage from "../search/components/ServicePopUP";
 import SearchResult from "./components/SearchResult";
 import ServiceCardsCarousel from "./components/ServiceCards";
+import { HeroSearchAndText, Services } from "@/components";
+import { changeServiceFormat } from "@/helper/changeServiceFormat";
 
 type SearchProps = {
-	id: number;
-	icon: string;
-	shortText: string;
-	slug: string;
+  id: number;
+  icon: string;
+  shortText: string;
+  slug: string;
 };
 
 export default function Search({ params }: any) {
-	const [Services, setServices] = useState<SearchProps[]>([
-		{
-			id: 0,
-			icon: "",
-			shortText: "",
-			slug: "",
-		},
-	]);
-	const initialService = params?.handyman?.split("-").join(" ");
-	const [userType, setUserType] = useState<string[]>([]);
-	const [servicePopUp, setServicePopUP] = useState<boolean>(false);
-	const [serviceCardData, setServiceCardData] = useState<string[]>([]);
-	const initialLoadRef = useRef(true);
+  // const [Services, setServices] = useState<SearchProps[]>([
+  // 	{
+  // 		id: 0,
+  // 		icon: "",
+  // 		shortText: "",
+  // 		slug: "",
+  // 	},
+  // ]);
+  const initialService = params?.handyman?.split("-").join(" ");
+  // const [userType, setUserType] = useState<string[]>([]);
+  // const [servicePopUp, setServicePopUP] = useState<boolean>(false);
+  // const [serviceCardData, setServiceCardData] = useState<string[]>([]);
+  // const initialLoadRef = useRef(true);
 
-	const HandleChange = useCallback(
-		(e: any) => {
-			const SearchVal = ServiceCards
-			// .sort((a, b) =>
-			// 	a.shortText.localeCompare(b.shortText)
-			// )
-			.filter((item) =>
-				item.shortText
-					.toLowerCase()
-					.includes(e.target.value.toLowerCase())
-			);
-			setServices(SearchVal);
-			setUserType([e.target.value]);
-		},
-		[setServices]
-	);
+  // const HandleChange = useCallback(
+  // 	(e: any) => {
+  // 		const SearchVal = ServiceCards
+  // 		// .sort((a, b) =>
+  // 		// 	a.shortText.localeCompare(b.shortText)
+  // 		// )
+  // 		.filter((item) =>
+  // 			item.shortText
+  // 				.toLowerCase()
+  // 				.includes(e.target.value.toLowerCase())
+  // 		);
+  // 		setServices(SearchVal);
+  // 		setUserType([e.target.value]);
+  // 	},
+  // 	[setServices]
+  // );
 
-	const FindService = () => {
-		if (initialLoadRef.current) {
-			const item = Services[0];
-			initialLoadRef.current = false;
-			setServiceCardData([item.shortText, item.slug]);
-			setServicePopUP(true);
-			return;
-		}
-		if (userType[0] !== "") {
-			setServiceCardData(userType);
-			setServicePopUP(true);
-			setUserType([""]);
-		}
-	};
+  // const FindService = () => {
+  // 	if (initialLoadRef.current) {
+  // 		const item = Services[0];
+  // 		initialLoadRef.current = false;
+  // 		setServiceCardData([item.shortText, item.slug]);
+  // 		setServicePopUP(true);
+  // 		return;
+  // 	}
+  // 	if (userType[0] !== "") {
+  // 		setServiceCardData(userType);
+  // 		setServicePopUP(true);
+  // 		setUserType([""]);
+  // 	}
+  // };
 
-	useEffect(() => {
-		HandleChange({ target: { value: initialService } });
-	}, [HandleChange, initialService]);
+  // useEffect(() => {
+  // 	HandleChange({ target: { value: initialService } });
+  // }, [HandleChange, initialService]);
 
-	return (
-		<div className="w-full Container">
-			<section className="w-full space-y-5">
+  return (
+    <div className="w-full Container">
+      {/* <section className="w-full space-y-5">
 				<div className="w-full flex justify-center items-center flex-col gap-2">
 					<label
 						htmlFor="search_service"
@@ -139,13 +141,17 @@ export default function Search({ params }: any) {
 						</div>
 					</div>
 				)}
-			</section>
-
-			<div className="py-10">
-				<ServiceCardsCarousel />
-
-				<SearchResult params={params} />
-			</div>
-		</div>
-	);
+			</section> */}
+      <HeroSearchAndText
+        homePageOrNOt={false}
+        title={false}
+        searchDefaultField={changeServiceFormat(params?.handyman)}
+      />
+      <div className="py-10">
+        <Services />
+        {/* <ServiceCardsCarousel /> */}
+        <SearchResult params={params} />
+      </div>
+    </div>
+  );
 }

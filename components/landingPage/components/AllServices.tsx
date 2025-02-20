@@ -17,7 +17,8 @@ export default function AllServices() {
   }, [servicePopUp]);
   // console.log(serviceCardData, "serviceCard data");
   return (
-    <div className="main-padding-box w-full xl:px-[150px] md:px-10 px-4">
+    <div className="main-padding-box w-full  md:px-10 px-4">
+      {/* xl:px-[150px] */}
       <div className="relative">
         <div className="mt-3  py-3 px-10">
           <ServiceCard
