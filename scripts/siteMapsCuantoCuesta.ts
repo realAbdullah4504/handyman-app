@@ -10,7 +10,7 @@ function generateSiteMapForHandymanSearch(): string {
 	<url>
 		<loc>${`${process.env.BASE_URL}/cuanto-cuesta${url}`}</loc>
 		<changefreq>daily</changefreq>
-		<priority>2</priority>
+		<priority>1.0</priority>
 	</url>`;
     })
     .join("");

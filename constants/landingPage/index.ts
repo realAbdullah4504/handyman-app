@@ -330,35 +330,35 @@ const FooterData = {
     },
   ],
   QuickLinks: [
-    {
-      id: 1,
-      title: "Condiciones de uso",
-      link: "/enlaces-rapidos/condiciones-de-uso",
-    },
+    // {
+    //   id: 1,
+    //   title: "Condiciones de uso",
+    //   link: "/enlaces-rapidos/condiciones-de-uso",
+    // },
     // {
     // 	id: 2,
     // 	title: "Contact Support",
     // 	link: "/contact-support",
     // },
     {
-      id: 3,
+      id: 1,
       title: "Preguntas frecuentes",
       link: "/enlaces-rapidos/faqs",
     },
   ],
   support: [
-    {
-      id: 1,
-      title: "Centro de ayuda",
-      link: "/apoyo/centro-de-ayuda",
-    },
+    // {
+    //   id: 1,
+    //   title: "Centro de ayuda",
+    //   link: "/apoyo/centro-de-ayuda",
+    // },
     // {
     // 	id: 2,
     // 	title: "Management",
     // 	link: "/management",
     // },
     {
-      id: 3,
+      id: 1,
       title: "política de privacidad",
       link: "/apoyo/politica-de-privacidad",
     },

@@ -24,8 +24,9 @@ function generateSiteMapForHandymanSearch(
   service: string
 ): string {
   const uniquePlaces = posts.reduce((acc: string[], post) => {
-    if (!acc.includes(post.Place_Name)) {
-      acc.push(post.Place_Name);
+    const placeName = post.Place_Name.replace(/\s+/g, ''); // Remove all spaces
+    if (!acc.includes(placeName)) {
+      acc.push(placeName);
     }
     return acc;
   }, []);
@@ -35,11 +36,12 @@ function generateSiteMapForHandymanSearch(
       return `<url>
 		<loc>${`${process.env.BASE_URL}/findhandyman/${service}?city=${Place_Name}`}</loc>
 		<changefreq>daily</changefreq>
-		<priority>2</priority>
+		<priority>1.0</priority>
 	</url>`;
     })
     .join("");
 }
+
 
 async function generateServiceSitemaps() {
   try {

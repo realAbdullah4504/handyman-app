@@ -11,7 +11,7 @@ function generateSiteMap() {
             return `<url>
 		<loc>${`${process.env.BASE_URL}/craftsman-near-me/${url.slug}`}</loc>
 		<changefreq>daily</changefreq>
-		<priority>2</priority>
+		<priority>1.0</priority>
 	</url>`;
         })
         .join("")}`;

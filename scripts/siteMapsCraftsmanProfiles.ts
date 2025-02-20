@@ -28,7 +28,7 @@ function generateSiteMapForCraftsmanProfile(posts: Craftsman[]): string {
 		<loc>${`${process.env.BASE_URL}/craftsman/${company_name}`}</loc>
 		<lastmod>${new Date(updatedAt).toISOString()}</lastmod>
 		<changefreq>daily</changefreq>
-		<priority>1</priority>
+		<priority>1.0</priority>
 	</url>`;
     })
     .join("");
