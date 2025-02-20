@@ -62,7 +62,6 @@ const Request_a_Quote__PopUp = ({
   );
 };
 
-
 const dummyText = `Ofrecemos servicios de manitas profesionales y de alta calidad.Contáctenos para una cotización y para comenzar su proyecto.`;
 
 const Available_handyman = ({ item }: any) => {
@@ -156,7 +155,9 @@ const Available_handyman = ({ item }: any) => {
                 {/* <span className="mb-1 ml-2">| 73</span> */}
               </div>
             </div>
-            <p className="sm:w-2/3 w-full">{item?.craftsman?.description || dummyText}</p>
+            <p className="sm:w-2/3 w-full">
+              {item?.craftsman?.description || dummyText}
+            </p>
           </section>
           <div className=" w-full">
             <div className="flex mt-6 flex-wrap   items-center justify-start ">
@@ -192,48 +193,36 @@ const Available_handyman = ({ item }: any) => {
   );
 };
 export default function SearchResult({ params }: any) {
-  const { handyman, search, city } = params;
-  const [orderTime, setOrderTime] = useState<orderTimeType>("Ordenar calificación");
+  // const { handyman, search, city } = params;
+  const { handyman, city } = params;
+  const [orderTime, setOrderTime] = useState<orderTimeType>(
+    "Ordenar calificación"
+  );
   const [orderNewOrOld, setOrderNewOrOld] = useState<boolean>(false);
   const [filterByRating, setFilterByRating] = useState<string>("");
-  const [dataHandyMan, setDataHandyMan] = useState<any>(null);
   const { SearchHandyman } = useUserRequests();
 
-  const {
-    data,
-    isLoading: loading,
-    hasNextPage,
-    fetchNextPage,
-    refetch,
-  } = SearchHandyman(
-    { pageSize: 10 },
-    {
-      zipCode: search[0],
-      service: handyman,
-      rating: filterByRating,
-      city: city,
-      distance: "50",
-    }
-  );
+  const { data, isFetching, hasNextPage, fetchNextPage, refetch } =
+    SearchHandyman(
+      { pageSize: 10 },
+      {
+        // zipCode: search[0],
+        service: handyman,
+        rating: filterByRating,
+        city: city,
+        distance: "50",
+      }
+    );
   //useScrollFetch({ hasNextPage, fetchNextPage, isWindowScroll: true });
 
-  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    refetch();
-  
-    return () => {
-      queryClient.invalidateQueries({ queryKey: ['searchHandyman'] });
-    };
-  }, [filterByRating, refetch, queryClient]);
+  const handleFilters = (filterName: string, orderTime: orderTimeType) => {
+    setOrderNewOrOld(false);
+    setOrderTime(orderTime);
+    setFilterByRating(filterName);
+  };
 
-  useEffect(() => {
-    if (data && !loading) {
-      setDataHandyMan(data.pages);
-    }
-  }, [data, loading]);
-
-  if (!dataHandyMan) {
+  if (isFetching) {
     return <Loader />;
   }
 
@@ -264,9 +253,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange  cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Toda");
-                  setFilterByRating("");
+                  handleFilters("", "Toda");
                 }}
               >
                 Toda
@@ -274,9 +261,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange   cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Calificación de cinco estrellas");
-                  setFilterByRating("5");
+                  handleFilters("5", "Calificación de cinco estrellas");
                 }}
               >
                 Calificación de cinco estrellas
@@ -284,9 +269,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange  cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Calificación de cuatro estrellas");
-                  setFilterByRating("4");
+                  handleFilters("4", "Calificación de cuatro estrellas");
                 }}
               >
                 Calificación de cuatro estrellas
@@ -294,9 +277,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange  cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Calificación de tres estrellas");
-                  setFilterByRating("3");
+                  handleFilters("3", "Calificación de tres estrellas");
                 }}
               >
                 Calificación de tres estrellas
@@ -304,9 +285,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange  cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Dos calificación de inicio");
-                  setFilterByRating("2");
+                  handleFilters("2", "Dos calificación de inicio");
                 }}
               >
                 Dos calificación de inicio
@@ -314,9 +293,7 @@ export default function SearchResult({ params }: any) {
               <span
                 className=" hover:text-orange  cursor-pointer"
                 onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Una calificación de inicio");
-                  setFilterByRating("1");
+                  handleFilters("1", "Una calificación de inicio");
                 }}
               >
                 Una calificación de inicio
@@ -326,7 +303,7 @@ export default function SearchResult({ params }: any) {
         </div>
       </div>
 
-      {dataHandyMan?.map((page: any, ind: number) => (
+      {data?.pages?.map((page: any, ind: number) => (
         <Fragment key={ind}>
           {page?.users?.length === 0 ? (
             <NotFoundData text="No se encuentra el perfil" />

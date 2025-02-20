@@ -46,16 +46,16 @@ async function generateServiceSitemaps() {
     const handymanSearch = await fetchHandymanData();
 
     for (const service of ServiceCards) {
-      // const filteredPostals = handymanSearch.filter((postal) =>
-      //   citySiteMaps.some(
-      //     (filtered) =>
-      //       postal.Place_Name.toLowerCase().includes(filtered.toLowerCase()) ||
-      //       filtered.toLowerCase().includes(postal.Place_Name.toLowerCase())
-      //   )
-      // );
+      const filteredPostals = handymanSearch.filter((postal) =>
+        citySiteMaps.some(
+          (filtered) =>
+            postal.Place_Name.toLowerCase().includes(filtered.toLowerCase()) ||
+            filtered.toLowerCase().includes(postal.Place_Name.toLowerCase())
+        )
+      );
 
       const handymanSearchSitemap = generateSiteMapForHandymanSearch(
-        handymanSearch,
+        filteredPostals,
         service.slug
       );
 

@@ -4,11 +4,10 @@ import {
   useInfiniteQuery,
   useMutation,
   useQuery,
-  useQueryClient,
 } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 const useUserRequests = () => {
   const apiCaller = useApiCaller();
-  const queryClient = useQueryClient();
   const { socket } = useSocketContext();
   const GetUser = (queryParams: any) =>
     useQuery({
@@ -121,18 +120,17 @@ const useUserRequests = () => {
     filter: {
       service: string;
       rating?: string;
-      zipCode: string;
       city: string;
       distance?: string;
     }
   ) => {
     return useInfiniteQuery({
-      queryKey: ["searchHandyman"],
+      queryKey: ["searchHandyman", filter.service, filter.city, filter.rating],
       queryFn: async ({ pageParam = 1 }) => {
         const response = await apiCaller.get(
-          `/find_handymans/?zipCode=${filter?.zipCode || ""}&service=${
-            filter?.service || ""
-          }&rating=${filter?.rating || ""}&city=${filter.city}&distance=${
+          `/find_handymans/?service=${filter?.service || ""}&rating=${
+            filter?.rating || ""
+          }&city=${filter.city}&distance=${
             filter?.distance
           }&pageSize=${pageSize}&pageNumber=${pageParam}`
         );

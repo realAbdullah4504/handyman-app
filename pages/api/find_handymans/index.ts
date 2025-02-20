@@ -23,7 +23,7 @@ export default async function handler(
 
 async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const zipCode = req.query?.zipCode;
+    // const zipCode = req.query?.zipCode;
     const service = req.query?.service;
     const pageSize = req.query?.pageSize || 10;
     const pageNumber = req.query?.pageNumber || 1;

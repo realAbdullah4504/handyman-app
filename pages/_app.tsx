@@ -11,7 +11,7 @@ import { changeServiceFormat } from "@/helper/changeServiceFormat";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/react"
-const queryClient = new QueryClient();
+import { queryClient } from "@/lib/queryClient";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const isDifferentLayout = router.pathname.startsWith("/cuanto-cuesta");

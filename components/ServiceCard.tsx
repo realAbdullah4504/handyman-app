@@ -17,7 +17,7 @@ export const Service = ({
 	showIcons = true,
 	selectedServices,
 }: ServicePropsType) => {
-	console.log("selectedServices", selectCard);
+	// console.log("selectedServices", selectCard);
 	const [toggle, setToggle] = useState<boolean>(true);
 	const addToSelectCard = (shortText: string) => {
 		if (setSelectCardError) setSelectCardError("");
