@@ -3,6 +3,7 @@ import path from "path";
 import "dotenv/config"; // Load environment variables
 import { ServiceCards } from "../constants/landingPage";
 import { citySiteMaps } from "./SiteMapCities";
+import { encodeSitemapUrl } from "../helper/urlEncode";
 
 type PostalData = {
   Postal_Code: string;
@@ -11,7 +12,7 @@ type PostalData = {
 
 async function fetchHandymanData(): Promise<PostalData[]> {
   const response = await fetch(
-    `${process.env.BASE_URL}/api/find_handymans/get_sitemap_data`
+    `http://localhost:3000/api/find_handymans/get_sitemap_data`
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch sitemap data`);
@@ -24,7 +25,7 @@ function generateSiteMapForHandymanSearch(
   service: string
 ): string {
   const uniquePlaces = posts.reduce((acc: string[], post) => {
-    const placeName = post.Place_Name.replace(/\s+/g, ''); // Remove all spaces
+    const placeName = post.Place_Name
     if (!acc.includes(placeName)) {
       acc.push(placeName);
     }
@@ -34,7 +35,7 @@ function generateSiteMapForHandymanSearch(
   return uniquePlaces
     .map((Place_Name) => {
       return `<url>
-		<loc>${`${process.env.BASE_URL}/findhandyman/${service}?city=${Place_Name}`}</loc>
+		<loc>${`${process.env.BASE_URL}/findhandyman/${encodeSitemapUrl(service)}?city=${encodeSitemapUrl(Place_Name)}`}</loc>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>`;
