@@ -209,11 +209,11 @@ export const components: ComponentMap = {
     Component: FindRoofersNearby,
     title: "Encuentra Techos Cerca de Ti",
   },
-  "técnico-de-aire-acondicionado": {
+  "técnica-de-aire-acondicionado": {
     Component: FindACTechnicianNearby,
     title: "Encuentra Técnico de Aire Acondicionado Cerca de Ti",
   },
-  "técnicas-climáticas":
+  "técnico-climático":
   {
     Component: FindClimateTechniciansNearby,
     title: "Encuentra Técnicos de Climatización Cerca de Ti",
