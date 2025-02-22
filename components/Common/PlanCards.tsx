@@ -68,7 +68,7 @@ const PlanCards: React.FC = () => {
       {Plans?.sort(
         (a: any, b: any) => a.duration_in_days - b.duration_in_days
       ).map((item: any, idx: any) => (
-        console.log(item),
+        // console.log(item),
         <div
           key={idx}
           className="flex bg-white items-center pb-0 flex-col justify-between p-4 border border-gray-300 rounded-lg h-[20rem] shadow-md mb-4"

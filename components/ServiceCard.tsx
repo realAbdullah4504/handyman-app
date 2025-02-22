@@ -22,7 +22,8 @@ export const Service = ({
 	const addToSelectCard = (shortText: string) => {
 		if (setSelectCardError) setSelectCardError("");
 		if (setSelectCard && toggle)
-			setSelectCard((prev) => [...prev, shortText]);
+			setSelectCard((prev = []) => [...prev, shortText]);
+		
 		else {
 			const newCard = selectCard?.filter((item) => item !== shortText);
 			//console.log("===================selected card================",selectCard)
