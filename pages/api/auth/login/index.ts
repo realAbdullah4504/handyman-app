@@ -37,11 +37,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 					});
 
 				const { otp, password, ...rest } = user._doc;
-				res.status(200).send({ ...rest });
+				return res.status(200).send({ ...rest });
 			} else createError("authentication failed", 401);
 		} catch (error: any) {
 			console.error(error);
-			errorResponse(res, error);
+			return errorResponse(res, error);
 		}
 	}
 
@@ -107,15 +107,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				{ new: true }
 			);
 
-			res.status(200).json(updatedUser);
+			return res.status(200).json(updatedUser);
 		} catch (error) {
 			console.log(error);
-			res.status(500).send("Internal server error");
+			return res.status(500).send("Internal server error");
 		}
 	}
 
 	if (!["GET", "POST"].includes(req.method as string)) {
-		res.status(404).json({ message: "Invalid request method" });
+		return res.status(404).json({ message: "Invalid request method" });
 	}
 };
 

@@ -44,7 +44,7 @@ export function verifyToken(req: NextApiRequest, res: NextApiResponse) {
 			return tokenUser;
 		} else return null;
 	} catch (error: any) {
-		errorResponse(res, error);
+		// errorResponse(res, error);
 		throw new Error("Token no válido");
 	}
 }
