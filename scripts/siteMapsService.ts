@@ -12,7 +12,7 @@ type PostalData = {
 
 async function fetchHandymanData(): Promise<PostalData[]> {
   const response = await fetch(
-    `http://localhost:3000/api/find_handymans/get_sitemap_data`
+    `https://handyman-app.vercel.app/api/find_handymans/get_sitemap_data`
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch sitemap data`);

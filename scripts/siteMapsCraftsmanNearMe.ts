@@ -3,7 +3,7 @@ import { ServiceCards } from "../constants/landingPage";
 import fs from "fs";
 import path from "path";
 import "dotenv/config"; // Load environment variables
-import { encodeSitemapUrl } from "@/helper/urlEncode";
+import { encodeSitemapUrl } from "../helper/urlEncode";
 
 function generateSiteMap() {
   const seoPages = ServiceCards;
