@@ -7,32 +7,35 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { ImArrowLeft2 } from "react-icons/im";
 import { queryClient } from "@/lib/queryClient";
-import { Suspense } from "react";
 
 export const getServerSideProps = async ({ req, params, query }: any) => {
   const protocol = req.headers["x-forwarded-proto"] || "http"; // Detect HTTPS in Vercel
   const host = req.headers.host; // e.g., example.com or localhost:3000
   const baseURL = `${protocol}://${host}`;
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: [
-      "searchHandyman",
-      query.handyman,
-      query.city,
-      query.rating || "",
-    ],
-    queryFn: async ({ pageParam = 1 }) => {
-      const response = await axios.get(
-        `${baseURL}/api/find_handymans/?service=${
-          query.handyman || ""
-        }&rating=${query.rating || ""}&city=${
-          query.city
-        }&distance=50&pageSize=10&pageNumber=${pageParam}`
-      );
-      return response.data;
-    },
-    initialPageParam: 1,
-  });
+  try {
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: [
+        "searchHandyman",
+        query.handyman,
+        query.city,
+        query.rating || "",
+      ],
+      queryFn: async ({ pageParam = 1 }) => {
+        const response = await axios.get(
+          `${baseURL}/api/find_handymans/?service=${
+            query.handyman || ""
+          }&rating=${query.rating || ""}&city=${
+            query.city
+          }&distance=50&pageSize=10&pageNumber=${pageParam}`
+        );
+        return response.data;
+      },
+      initialPageParam: 1,
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 
   return {
     props: {
@@ -95,11 +98,13 @@ export default function Handyman({ params, dehydratedState }: any) {
           <section className="Container space-y-10 text-center mb-10">
             <h1 className="text-3xl capitalize md:text-4xl font-bold">
               Encuentra {changeServiceFormat(handyman)} en{" "}
-              <span className="text-orange">{changeServiceFormat(city)}</span> - Obtén ofertas gratis{" "}
+              <span className="text-orange">{changeServiceFormat(city)}</span> -
+              Obtén ofertas gratis{" "}
             </h1>
             <p className="w-full lg:w-1/2 text-gray-600 text-left font-medium mx-auto">
-              ¿Estás buscando {changeServiceFormat(handyman)} en {changeServiceFormat(city)}? Con
-              nuestro servicio, puedes encontrar rápidamente y de forma gratuita{" "}
+              ¿Estás buscando {changeServiceFormat(handyman)} en{" "}
+              {changeServiceFormat(city)}? Con nuestro servicio, puedes
+              encontrar rápidamente y de forma gratuita{" "}
               {changeServiceFormat(handyman)} verificados en tu área. Compara
               las opiniones de otros clientes y elige al profesional adecuado
               para tus {changeServiceFormat(handyman)} necesidades.
