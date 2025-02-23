@@ -10,33 +10,33 @@ import { queryClient } from "@/lib/queryClient";
 import { Suspense } from "react";
 
 export const getServerSideProps = async ({ req, params, query }: any) => {
-  // const protocol = req.headers["x-forwarded-proto"] || "http"; // Detect HTTPS in Vercel
-  // const host = req.headers.host; // e.g., example.com or localhost:3000
-  // const baseURL = `${protocol}://${host}`;
+  const protocol = req.headers["x-forwarded-proto"] || "http"; // Detect HTTPS in Vercel
+  const host = req.headers.host; // e.g., example.com or localhost:3000
+  const baseURL = `${protocol}://${host}`;
 
-  // await queryClient.prefetchInfiniteQuery({
-  //   queryKey: [
-  //     "searchHandyman",
-  //     query.handyman,
-  //     query.city,
-  //     query.rating || "",
-  //   ],
-  //   queryFn: async ({ pageParam = 1 }) => {
-  //     const response = await axios.get(
-  //       `${baseURL}/api/find_handymans/?service=${
-  //         query.handyman || ""
-  //       }&rating=${query.rating || ""}&city=${
-  //         query.city
-  //       }&distance=50&pageSize=10&pageNumber=${pageParam}`
-  //     );
-  //     return response.data;
-  //   },
-  //   initialPageParam: 1,
-  // });
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: [
+      "searchHandyman",
+      query.handyman,
+      query.city,
+      query.rating || "",
+    ],
+    queryFn: async ({ pageParam = 1 }) => {
+      const response = await axios.get(
+        `${baseURL}/api/find_handymans/?service=${
+          query.handyman || ""
+        }&rating=${query.rating || ""}&city=${
+          query.city
+        }&distance=50&pageSize=10&pageNumber=${pageParam}`
+      );
+      return response.data;
+    },
+    initialPageParam: 1,
+  });
 
   return {
     props: {
-      // dehydratedState: dehydrate(queryClient),
+      dehydratedState: dehydrate(queryClient),
       params: { ...params, city: query.city, search: query.search || "" },
     },
   };
@@ -56,7 +56,7 @@ export default function Handyman({ params, dehydratedState }: any) {
   const { handyman, city } = params;
   // console.log(handyman, city);
   return (
-    // <HydrationBoundary state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
         <div className="w-full">
           <Head>
             <title className="capitalize">
@@ -113,6 +113,6 @@ export default function Handyman({ params, dehydratedState }: any) {
           </div>
           <Footer />
         </div>
-    // {/* </HydrationBoundary> */}
+    </HydrationBoundary>
   );
 }
