@@ -1,10 +1,11 @@
 // Import necessary modules
 import { updateSeenStataus } from "@/backend/controllers/Coversation/CreateMessage";
 import { verifyToken } from "@/backend/middleware/verifyJwt";
+import connectDb from "@/backend/middleware/db";
 import { createError } from "@/backend/utils/errorHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -34,3 +35,5 @@ export default async function handler(
 		res.status(405).json({ error: "Method Not Allowed" });
 	}
 }
+
+export default connectDb(handler);

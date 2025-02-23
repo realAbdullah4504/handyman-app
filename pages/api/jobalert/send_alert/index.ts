@@ -2,9 +2,10 @@
 
 import { findMatchingJobsAndSendEmail } from "@/backend/controllers/JobAlert/matchJobs";
 import { verifyToken } from "@/backend/middleware/verifyJwt";
+import connectDb from "@/backend/middleware/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -19,3 +20,5 @@ export default async function handler(
 			break;
 	}
 }
+
+export default connectDb(handler);

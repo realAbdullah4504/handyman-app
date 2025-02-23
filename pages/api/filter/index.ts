@@ -1,10 +1,11 @@
 // Import necessary modules
 import { getFilter, updateFilter } from "@/backend/controllers/Filter";
 import { getJobAlerts, updateJobAlert } from "@/backend/controllers/JobAlert";
+import connectDb from "@/backend/middleware/db";
 import { verifyToken } from "@/backend/middleware/verifyJwt";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -23,3 +24,5 @@ export default async function handler(
             break;
     }
 }
+
+export default connectDb(handler);

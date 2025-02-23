@@ -1,6 +1,7 @@
 // pages/api/notifications.ts
 import { verifyToken } from "@/backend/middleware/verifyJwt";
 import { errorResponse } from "@/backend/utils/errorHandler";
+import connectDb from "@/backend/middleware/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import {
 	createNotification,
@@ -10,7 +11,7 @@ import {
 	markNotificationAsRead,
 } from "../../../backend/controllers/Notifications/index";
 
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -76,3 +77,5 @@ export default async function handler(
 		res.status(405).json({ message: "Method Not Allowed" });
 	}
 }
+
+export default connectDb(handler);

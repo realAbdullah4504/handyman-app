@@ -4,11 +4,12 @@ import {
 	createConversation,
 } from "@/backend/controllers/Coversation/CreateMessage";
 import { getConversationsByUser } from "@/backend/controllers/Coversation/GetCoversation";
+import connectDb from "@/backend/middleware/db";
 import { verifyToken } from "@/backend/middleware/verifyJwt";
 import { createError, errorResponse } from "@/backend/utils/errorHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -79,3 +80,5 @@ export default async function handler(
 		res.status(405).json({ error: "Method Not Allowed" });
 	}
 }
+
+export default connectDb(handler);

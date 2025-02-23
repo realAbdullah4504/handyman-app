@@ -3,7 +3,7 @@ import PostalCode from "@/backend/models/PostalCode";
 import { ServiceCards } from "@/constants/landingPage";
 import { citySiteMaps } from "@/scripts/SiteMapCities";
 import { NextApiRequest, NextApiResponse } from "next";
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -19,7 +19,7 @@ export default async function handler(
       break;
   }
 }
-connectDb(handler);
+export default connectDb(handler);
 
 function getCityZipService(postalcodeArray: any, serviceArray: any) {
   let response: any[] = [];

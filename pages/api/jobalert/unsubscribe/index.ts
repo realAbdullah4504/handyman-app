@@ -1,5 +1,6 @@
 // Importing necessary modules and utilities
 import JobAlert from "@/backend/models/JobAlert"; // Importing the JobAlert model
+import connectDb from "@/backend/middleware/db";
 import userDb from "@/backend/models/userModel"; // Importing the user model
 import { createError, errorResponse } from "@/backend/utils/errorHandler"; // Importing error handling utilities
 import { transporter } from "@/helper/mailTransporter"; // Importing the mail transporter utility
@@ -7,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next"; // Importing Next.js typ
 import { sendUnsubscriptionConfirmation } from "./unsubscribeEmial"; // Importing the function to send unsubscription confirmation email
 
 // Handler function for the API endpoint
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -72,3 +73,5 @@ export default async function handler(
 			break;
 	}
 }
+
+export default connectDb(handler);

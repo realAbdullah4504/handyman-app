@@ -2,6 +2,7 @@
 import createOffer from "@/backend/controllers/Offers/CreateOffer";
 import getOffersByUser from "@/backend/controllers/Offers/GetOffer";
 import updateOffer from "@/backend/controllers/Offers/UpdateOffer";
+import connectDb from "@/backend/middleware/db";
 import { verifyToken } from "@/backend/middleware/verifyJwt";
 import Craftsman from "@/backend/models/CrafstmanModel";
 import {
@@ -11,7 +12,7 @@ import {
 } from "@/backend/utils/errorHandler";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
+async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
@@ -134,3 +135,5 @@ export default async function handler(
 		res.status(405).json({ error: "Method Not Allowed" });
 	}
 }
+
+export default connectDb(handler);
