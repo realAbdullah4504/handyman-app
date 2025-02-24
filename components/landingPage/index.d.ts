@@ -12,7 +12,7 @@ interface ServiceCardProps extends CommonProps {
   count?: number;
   showIcons?: boolean;
   selectedServices?: string;
-  handleUpdate?:(data)=>void;
+  jobType?:string
 }
 
 type ServicePropsType = CommonProps & {
@@ -21,4 +21,5 @@ type ServicePropsType = CommonProps & {
   slug: string;
   showIcons?: boolean;
   selectedServices?: string;
+  jobType?:string
 };

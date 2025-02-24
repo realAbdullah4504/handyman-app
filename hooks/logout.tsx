@@ -1,5 +1,6 @@
 // utils/auth.ts
 import { useAuth } from "@/context/AuthContext";
+import { queryClient } from "@/lib/queryClient";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
@@ -15,6 +16,7 @@ export const useLogout = () => {
 		setUserData([]);
 		router.replace("/");
 		toast.success("INCOMPTIR SEXITO");
+		queryClient.clear();
 	};
 
 	return logout;

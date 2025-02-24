@@ -1,4 +1,4 @@
-import useFilterRequests from "@/ApiRequests/filter";
+import { useGetFilters } from "@/ApiRequests/filter";
 import useJobpostRequests from "@/ApiRequests/jobpost";
 import { NewListedOrderPage } from "@/components";
 import { HandymanLayout } from "@/components/Dashboard";
@@ -15,14 +15,17 @@ import { FaFilter } from "react-icons/fa";
 
 export default function Index() {
   const handleError = clientError();
-  const [selectCard, setSelectCard] = useState<string[]>([]);
-  const [orderTime, setOrderTime] = useState<orderTimeType>("Sort by newest or older");
+  const [orderTime, setOrderTime] = useState<orderTimeType>(
+    "Sort by newest or older"
+  );
   const { userData } = useAuth();
   const user = userData[0] || undefined;
   const postalCode: string = user?.address?.Postal_Code.toString() || "";
 
   const { GetPublicJobs } = useJobpostRequests();
-  const { GetFilter, UpdatedFilter } = useFilterRequests();
+  const [selectCard, setSelectCard] = useState<string[]>([]);
+  const {data:savedFilters}=useGetFilters()
+
 
   const [filter, setFilter] = useState<FilterType>({
     distance: "100",
@@ -30,37 +33,18 @@ export default function Index() {
     categories: [],
   });
 
-  const [selectedService, setSelectedService] = useState<string>("Select Service");
+  const [selectedService, setSelectedService] =
+    useState<string>("Select Service");
 
-  const handleUpdate = async (data: any) => {
-    try {
-      await UpdatedFilter.mutateAsync(data, {
-        onSuccess(data) {
-          // Optional: handle successful update here
-        },
-      });
-    } catch (error) {
-      console.error(error);
-      handleError(error);
-    }
-  };
+  console.log("filters", filter,'service',selectedService,'card',selectCard);
 
   useEffect(() => {
-    (async () => {
-      const res = await GetFilter();
-      setSelectCard(res?.categories);
-      setFilter(res); // Set initial filter when GetFilter is successful
-    })();
-  }, []); // Empty dependency array: runs only once on mount
-
-  useEffect(() => {
-    if (filter && JSON.stringify(filter.categories) !== JSON.stringify(selectCard)) {
-      // Check if categories actually changed
-      const newFilter = { ...filter, categories: selectCard };
-      handleUpdate(newFilter); // Call the update function only if necessary
-      setFilter(newFilter); // Update state only if categories changed
+    if (savedFilters) {
+    setFilter({distance:savedFilters.distance,pin_code:savedFilters.pin_code,categories:savedFilters.categories});
+    setSelectCard(savedFilters.categories);
     }
-  }, [selectCard, filter]); // Trigger effect when selectCard or filter changes
+
+  }, [savedFilters]);
 
   const {
     data,
@@ -123,20 +107,23 @@ export default function Index() {
                 setOrderTime={setOrderTime}
                 selectedServices={selectedService}
                 setSelectedServices={setSelectedService}
-                handleUpdate={handleUpdate}
               />
             </div>
 
             <div className="p-4">
-               {filter  && Object?.values(filter)?.some((i) => i?.length > 0) && isPending ? (
+              {filter &&
+              Object?.values(filter)?.some((i) => i?.length > 0) &&
+              isPending ? (
                 <Loader />
               ) : data && data?.pages[0]?.data?.length > 0 ? (
                 <div className={`mx-auto xl:px-20`}>
-                  {data && data?.pages?.[0]?.data && data?.pages?.[0]?.data?.map((job: any, pageIndex: any) => (
-                    <React.Fragment key={pageIndex}>
-                      <JOB key={job._id} jobs={job} />
-                    </React.Fragment>
-                  ))}
+                  {data &&
+                    data?.pages?.[0]?.data &&
+                    data?.pages?.[0]?.data?.map((job: any, pageIndex: any) => (
+                      <React.Fragment key={pageIndex}>
+                        <JOB key={job._id} jobs={job} />
+                      </React.Fragment>
+                    ))}
 
                   {isFetchingNextPage && <Loader />}
                 </div>

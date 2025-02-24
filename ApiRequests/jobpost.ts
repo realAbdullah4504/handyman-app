@@ -19,7 +19,7 @@ const useJobpostRequests = () => {
   const queryClient = useQueryClient();
   const GetUserJobPost = ({ pageSize }: { pageSize: number }, filter: any) => {
     return useInfiniteQuery({
-      queryKey: ["getUserJobPostData"],
+      queryKey: ["getUserJobPostData",filter],
       queryFn: async ({ pageParam = 1 }) => {
         const response = await apiCaller.get(
           `/jobpost?pageSize=${pageSize}&pageNumber=${pageParam}`

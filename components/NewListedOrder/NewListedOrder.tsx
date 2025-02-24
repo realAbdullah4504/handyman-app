@@ -7,8 +7,9 @@ import { RxCross2 } from "react-icons/rx";
 import SliderCrouserl from "react-slick";
 import Loader from "../Loader";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useUpdateFilter } from "@/ApiRequests/filter";
 
-const Filters = ({ setFilter, filter, handleUpdate }: FilterPropsType) => {
+const Filters = ({ setFilter, filter}: FilterPropsType) => {
   const [address, setAddress] = useState<any>("");
   const { userData } = useAuth();
   const user = userData[0];
@@ -16,6 +17,7 @@ const Filters = ({ setFilter, filter, handleUpdate }: FilterPropsType) => {
   const [search, setSearch] = useState(true);
   const [zipCode, setZipcode] = useState<any>(user?.address?.Postal_Code);
   const [distance, setDistance] = useState("");
+  const {mutate:handleUpdateFilters}=useUpdateFilter()
   // const { GetPostalsBySearch } = usePostalRequests();
   // const { data, refetch, isLoading } = GetPostalsBySearch(zipCode);
   // const handleLocation = (address: any) => {
@@ -35,7 +37,7 @@ const Filters = ({ setFilter, filter, handleUpdate }: FilterPropsType) => {
 
   const handleDistanceChange = useDebounce((filter) => {
     setFilter(filter);
-    handleUpdate && handleUpdate(filter);
+    handleUpdateFilters({distance:filter.distance});
   }, 500);
 
   return (
@@ -57,95 +59,6 @@ const Filters = ({ setFilter, filter, handleUpdate }: FilterPropsType) => {
         </div>
       </div>
       <div className="hidden sm:block"></div>
-      {/* sort by service not needed for now */}
-      {/* <div>
-        {" "}
-        <p className="font-semibold mb-4">Service</p>
-        <div className="relative">
-          <div
-            className={`shadow bg-white  flex justify-center items-center rounded-md py-3 px-4 gap-4 ${
-              isService && "text-orange"
-            }`}
-          >
-            <button onClick={() => setIsService(!isService)}>
-              {selectedServices}{" "}
-            </button>
-            <GoChevronDown className="mt-1 text-xl" />
-          </div>
-          {isService && (
-            <div
-              className={`h-60 overflow-auto bg-white shadow  p-3 rounded cursor-pointer  mt-1   absolute flex flex-col space-y-5 z-40`}
-            >
-              {ServiceCards?.map((item, idx) => {
-                return (
-                  <span
-                    key={idx}
-                    className={`hover:text-orange  cursor-pointer ${
-                      selectCard?.includes(item?.shortText) && "text-orange"
-                    }`}
-                    onClick={() => {
-                      setIsService(false);
-                      setSelectedServices?.(item?.shortText);
-                    }}
-                  >
-                    {item?.shortText}
-                  </span>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </div> */}
-      {/* newest to older sorting function */}
-      {/* <div>
-        {" "}
-        <p className="font-semibold mb-4">Sort by</p>
-        <div className="relative">
-          <div
-            className={`shadow bg-white flex justify-center items-center rounded-md py-3 px-4 gap-4 ${
-              orderNewOrOld && "text-orange"
-            }`}
-          >
-            <button onClick={() => setOrderNewOrOld(!orderNewOrOld)}>
-              {orderTime}
-            </button>
-            <GoChevronDown className="mt-1 text-xl" />
-          </div>
-          {orderNewOrOld && (
-            <div
-              className={`bg-white shadow  p-3 rounded cursor-pointer  mt-1   absolute flex flex-col space-y-5 z-40`}
-            >
-              <span
-                className=" hover:text-orange  cursor-pointer"
-                onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Sort by New order");
-                }}
-              >
-                Sort by New order
-              </span>
-              <span
-                className=" hover:text-orange  cursor-pointer"
-                onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Sort by Older order");
-                }}
-              >
-                Sort by Older order
-              </span>
-              <span
-                className=" hover:text-orange  cursor-pointer"
-                onClick={() => {
-                  setOrderNewOrOld(false);
-                  setOrderTime("Sort by newest or older");
-                }}
-              >
-                Sort by newest or older
-              </span>
-            </div>
-          )}
-        </div>
-      </div> */}
     </div>
   );
 };
@@ -159,7 +72,6 @@ export default function Index({
   setOrderTime,
   selectedServices,
   setSelectedServices,
-  handleUpdate,
 }: NewListedOrderPropsType) {
   const slider = useRef<SliderCrouserl>(null);
   return (
@@ -178,7 +90,6 @@ export default function Index({
           selectCard={selectCard}
           selectedServices={selectedServices}
           setSelectedServices={setSelectedServices}
-          handleUpdate={handleUpdate}
         />
       </div>
 
@@ -191,7 +102,7 @@ export default function Index({
             setSelectCard={setSelectCard}
             selectCard={selectCard}
             selectedServices={selectedServices}
-            handleUpdate={handleUpdate}
+            jobType="listing"
           />
           <div
             className="text-4xl flex justify-between items-center top-[45%] absolute right-10 left-8 "

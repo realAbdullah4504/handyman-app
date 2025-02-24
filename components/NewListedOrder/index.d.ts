@@ -19,7 +19,6 @@ type NewListedOrderPropsType = OrderTimeProps & {
   setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
   selectedServices?: string;
   setSelectedServices: React.Dispatch<setStateAction<string>>;
-  handleUpdate:(data)=>void;
 };
 interface FilterPropsType extends OrderTimeProps {
   setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
@@ -27,5 +26,4 @@ interface FilterPropsType extends OrderTimeProps {
   selectCard?: string[];
   selectedServices?: string;
   setSelectedServices?: React.Dispatch<SetStateAction<string>>;
-  handleUpdate?:(data)=>void;
 }

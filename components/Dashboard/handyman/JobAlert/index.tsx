@@ -242,6 +242,7 @@ export default function JobAlerts() {
 						setSelectCard={setSelectCard}
 						selectCard={selectCard}
 						selectedServices={selectedService}
+						jobType="alert"
 					/>
 					</div>
 					
