@@ -1,3 +1,5 @@
+// Import necessary modules
+
 import connectDb from "@/backend/middleware/db";
 import PostalCode from "@/backend/models/PostalCode";
 import userDb from "@/backend/models/userModel";
@@ -5,7 +7,10 @@ import { createError, errorResponse } from "@/backend/utils/errorHandler";
 import getDistanceAggrQuery from "@/helper/aggregateDistanceQuery";
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   switch (req.method) {
     case "GET":
       await GetHandyman(req, res);
@@ -18,6 +23,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
   try {
+    const zipCode = req.query?.zipCode;
     const service = req.query?.service;
     const pageSize = req.query?.pageSize || 10;
     const pageNumber = req.query?.pageNumber || 1;
@@ -25,23 +31,26 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
     const minRating = req.query.rating;
     let distance = Number(req.query.distance);
 
+    // if (!zipCode || zipCode === "undefined") {
+    //   return createError("missing zip code", 400);
+    // }
+
     if (!service) {
-      return res.status(400).json({ error: "missing service" });
+      return createError("missing service", 400);
     }
 
     if (!city) {
-      return res.status(400).json({ error: "missing city" });
+      return createError("missing city", 400);
     }
-
     const currentPostalCode = await PostalCode.findOne({ Place_Name: city });
-    if (!currentPostalCode) {
-      return res.status(404).json({ error: "City not found" });
-    }
-
     const currentLatitude = Number(currentPostalCode?.Latitude);
     const currentLongitude = Number(currentPostalCode?.Longitude);
 
-    const distanceAggregation = getDistanceAggrQuery(currentLongitude, currentLatitude);
+    //distance=100000;
+    const distanceAggregation = getDistanceAggrQuery(
+      currentLongitude,
+      currentLatitude
+    );
     const distanceInKiloMeters = distance;
     const distanceCheckAggregation = {
       $match: { distance: { $lte: distanceInKiloMeters } },
@@ -54,6 +63,7 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
     const postalCodeIds = postalCodesWithinRadius.map((doc) => doc._id);
 
     const serviceString = String(service).split("-").join(" ");
+    // Use aggregation pipeline to get users
     const lastStage: any = [
       {
         $sort: {
@@ -61,6 +71,8 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
           "craftsman.statusOrder": 1,
         },
       },
+      // { $skip: (Number(pageNumber) - 1) * Number(pageSize) },
+      //{ $limit: Number(pageSize) },
     ];
     if (minRating) {
       lastStage.unshift({
@@ -80,7 +92,7 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
       },
       {
         $lookup: {
-          from: "postalcodes",
+          from: "postalcodes", // The name of the PostalCode collection
           localField: "address",
           foreignField: "_id",
           as: "address",
@@ -89,10 +101,17 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
       {
         $unwind: "$address",
       },
+
+      // {
+      // $match: {
+      //    "address.Postal_Code": Number(zipCode),
+      // "address.Place_Name": city,
+      //  },
+      // },
       { $addFields: { admin_name: "$address.Admin_Name" } },
       {
         $lookup: {
-          from: "craftsmen",
+          from: "craftsmen", // The name of the Craftsman collection
           localField: "craftsman",
           foreignField: "_id",
           as: "craftsman",
@@ -109,9 +128,10 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
           "craftsman.status": "verified",
         },
       },
+
       {
         $lookup: {
-          from: "reviews",
+          from: "reviews", // The name of the Reviews collection
           localField: "craftsman.reviews",
           foreignField: "_id",
           as: "reviews",
@@ -152,8 +172,9 @@ async function GetHandyman(req: NextApiRequest, res: NextApiResponse) {
                   },
                   then: 1,
                 },
+                // Add more cases as needed for other status values
               ],
-              default: 2,
+              default: 2, // Default value for any other status
             },
           },
         },

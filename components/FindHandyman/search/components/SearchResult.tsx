@@ -306,7 +306,7 @@ export default function SearchResult({ params }: any) {
       {data?.pages?.map((page: any, ind: number) => (
         <Fragment key={ind}>
           {page?.users?.length === 0 ? (
-            <NotFoundData text="No se encuentra el perfil" />
+            <NotFoundData text="Actualmente no hay profesionales disponibles en esta ciudad" />
           ) : (
             page?.users?.map((item: any, ind: number) => (
               <Available_handyman item={item} key={ind} />

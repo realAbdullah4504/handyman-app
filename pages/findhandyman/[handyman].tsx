@@ -63,12 +63,22 @@ export default function Handyman({ params, dehydratedState }: any) {
       <div className="w-full">
         <Head>
           <title className="capitalize">
-            {`Encuentra ${handyman} Verificados en ${city} - Compara Reseñas y Contrata
+            {`Encuentra ${changeServiceFormat(
+              handyman
+            )} Verificados en ${changeServiceFormat(city)} - Compara Reseñas y Contrata
         al Profesional Adecuado`}
           </title>
           <meta
             name="description"
-            content={`¿Estás buscando un ${handyman} en ${city}? Nuestro servicio te permite descubrir fácilmente ${handyman} verificados en tu área. Compara reseñas de clientes y selecciona al profesional ideal para tus necesidades de ${handyman}. Obtén servicios de ${handyman} confiables y de alta calidad con facilidad.`}
+            content={`¿Estás buscando un ${changeServiceFormat(
+              handyman
+            )} en ${changeServiceFormat(city)}? Nuestro servicio te permite descubrir fácilmente ${changeServiceFormat(
+              handyman
+            )} verificados en tu área. Compara reseñas de clientes y selecciona al profesional ideal para tus necesidades de ${changeServiceFormat(
+              handyman
+            )}. Obtén servicios de ${changeServiceFormat(
+              handyman
+            )} confiables y de alta calidad con facilidad.`}
           />{" "}
           {/*Short description more effective for SEO*/}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
