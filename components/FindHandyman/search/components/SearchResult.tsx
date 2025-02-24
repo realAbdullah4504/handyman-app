@@ -231,7 +231,7 @@ export default function SearchResult({ params }: any) {
       <div className="flex justify-between flex-wrap gap-3 items-center mt-1">
         <div className="flex items-center  justify-center bg-white shadow rounded-lg py-[20px] px-[10px]">
           <p className="font-semibold">
-            Explore los perfiles calificados de artesanos en {city} para{" "}
+            Explore los perfiles calificados de artesanos en {changeServiceFormat(city)} para{" "}
             {changeServiceFormat(handyman)} Dentro de un radio de 50 kilómetros
           </p>
         </div>
