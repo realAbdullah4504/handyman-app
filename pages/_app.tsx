@@ -33,8 +33,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
               <Component {...pageProps} />
               </ErrorBoundary>
             )}
-            <SpeedInsights />
-            <Analytics />
+            {/* <SpeedInsights />
+            <Analytics /> */}
             {process.env.NEXT_PUBLIC_ENV === "development" && (
               <ReactQueryDevtools initialIsOpen={false} />
             )}

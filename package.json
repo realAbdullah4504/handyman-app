@@ -50,6 +50,7 @@
     "moment": "^2.30.1",
     "mongoose": "6.12.0",
     "next": "13.3.4",
+    "next-auth": "^4.24.11",
     "next-cloudinary": "^4.27.0",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.7",
