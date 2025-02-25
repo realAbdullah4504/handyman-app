@@ -309,51 +309,35 @@ const CraftManData = [
   },
 ];
 
-
 const FooterData = {
-  "AvisoLegal": [
+  AvisoLegal: [
     {
       id: 1,
       title: "Aviso Legal",
       link: "/footer/aviso-legal",
     },
+  ],
+  "Política de Privacidad": [
     {
       id: 2,
       title: "Política de Privacidad",
       link: "/footer/politica-de-privacidad",
     },
+  ],
+  "Condiciones de Uso": [
     {
       id: 3,
       title: "Condiciones de Uso",
       link: "/footer/condiciones-de-uso",
     },
+  ],
+  "Política de Cookies": [
     {
       id: 4,
       title: "Política de Cookies",
       link: "/footer/politica-de-cookies",
     },
   ],
-  // "Política de Privacidad": [
-  //   {
-  //     id: 1,
-  //     title: "Política de Privacidad",
-  //     link: "/enlaces-rapidos/faqs",
-  //   },
-  // ],
-  // "Condiciones de Uso": [
-  //   {
-  //     id: 1,
-  //     title: "Condiciones de Uso",
-  //     link: "/apoyo/politica-de-privacidad",
-  //   },
-  // ],
-  // "Política de Cookies": [
-  //   {
-  //     id: 1,
-  //     title: "Política de Cookies",
-  //     link: "/apoyo/politica-de-privacidad",
-  //   },
-  // ],
 };
 const StepsCardsData = [
   {

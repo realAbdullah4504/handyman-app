@@ -5,7 +5,7 @@ import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
 
 const FooterNavigation = () => (
   <React.Fragment>
-    <nav className="m-2 space-y-7">
+    <nav className="m-2 space-y-7  min-w-fit">
       <h2 className="text-2xl font-bold">Aviso Legal</h2>
       <div className="text-gray-500">
         <ul className="list-none space-y-2">
@@ -15,7 +15,7 @@ const FooterNavigation = () => (
         </ul>
       </div>
     </nav>
-    {/* <nav className="m-2 space-y-7">
+    <nav className="m-2 space-y-7  min-w-fit">
       <h2 className="text-2xl font-bold">Política de Privacidad</h2>
       <div className="text-gray-500">
         <ul className="list-none space-y-2">
@@ -25,7 +25,7 @@ const FooterNavigation = () => (
         </ul>
       </div>
     </nav>
-    <nav className="m-2 space-y-7">
+    <nav className="m-2 space-y-7  min-w-fit">
       <h2 className="text-2xl font-bold">Condiciones de Uso</h2>
       <div className="text-gray-500">
         <ul className="list-none space-y-2">
@@ -35,7 +35,7 @@ const FooterNavigation = () => (
         </ul>
       </div>
     </nav>
-    <nav className="m-2 space-y-7">
+    <nav className="m-2 space-y-7  min-w-fit">
       <h2 className="text-2xl font-bold">Política de Cookies</h2>
       <div className="text-gray-500">
         <ul className="list-none space-y-2">
@@ -44,7 +44,7 @@ const FooterNavigation = () => (
           ))}
         </ul>
       </div>
-    </nav> */}
+    </nav>
     <div />
   </React.Fragment>
 );
@@ -60,8 +60,8 @@ const FooterLinks = ({ title, link }: { title: string; link: string }) => {
 export default function Footer() {
   return (
     <footer className="w-full bg-mainBackground">
-      <div className="flex justify-around  gap-10 mb-20 Container py-3 pt-10  lg:flex-nowrap flex-wrap ">
-        <section className="sm:basis-1/2 grow-0 space-y-7 basis-auto">
+      <div className="flex  gap-10 mb-20 pl-[30px] container py-3 pt-10  flex-wrap mx-auto ">
+        <section className=" grow-0 space-y-7 sm:basis-1/4">
           <h2 className="text-2xl font-bold">Servicio de Reparaciones</h2>
           <p className="text-gray-500">
             ¿Buscas un servicio específico de mejora del hogar? Nuestra
@@ -71,7 +71,7 @@ export default function Footer() {
             la tarea en detalle.
           </p>
         </section>
-        <div className=" flex justify-between lg:min-w-fit flex-wrap lg:flex-nowrap">
+        <div className=" flex   flex-wrap sm:basis-1/4 flex-1 justify-between ">
           {/* <div className="flex justify-between"> */}
             <FooterNavigation />
           {/* </div> */}

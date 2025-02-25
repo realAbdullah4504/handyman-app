@@ -1,8 +1,11 @@
 import { NextPage } from "next";
+import { Footer, Header } from "@/components";
 
 const CondicionesDeUso: NextPage = () => {
   return (
-    <div className="container mx-auto p-6">
+    <>
+    <Header/>
+    <div className="container mx-auto pt-12 px-6">
       <h1 className="text-2xl font-bold">Condiciones de Uso</h1>
       <p>Última actualización: [Fecha]</p>
       <p>El uso de Oficios24.es implica la aceptación de los siguientes términos y condiciones.</p>
@@ -13,6 +16,8 @@ const CondicionesDeUso: NextPage = () => {
       <p>5. Oficios24.es no se hace responsable de daños derivados de la contratación de servicios a través de la plataforma.</p>
       <p>Para cualquier consulta, puede contactarnos en info@oficios24.es o al teléfono +49 174 899-9213.</p>
     </div>
+    <Footer/>
+    </>
   );
 };
 
