@@ -311,58 +311,49 @@ const CraftManData = [
 
 
 const FooterData = {
-  AboutUS: [
+  "AvisoLegal": [
     {
       id: 1,
-      title: "Nuestra historia",
-      link: "/sobre-nosotras/nuestra-historia",
+      title: "Aviso Legal",
+      link: "/footer/aviso-legal",
     },
-    // {
-    // 	id: 2,
-    // 	title: "Careers",
-    // 	link: "/careers",
-    // },
-
+    {
+      id: 2,
+      title: "Política de Privacidad",
+      link: "/footer/politica-de-privacidad",
+    },
     {
       id: 3,
-      title: "Contacta con nosotras",
-      link: "/sobre-nosotras/contacto",
+      title: "Condiciones de Uso",
+      link: "/footer/condiciones-de-uso",
     },
-  ],
-  QuickLinks: [
-    // {
-    //   id: 1,
-    //   title: "Condiciones de uso",
-    //   link: "/enlaces-rapidos/condiciones-de-uso",
-    // },
-    // {
-    // 	id: 2,
-    // 	title: "Contact Support",
-    // 	link: "/contact-support",
-    // },
     {
-      id: 1,
-      title: "Preguntas frecuentes",
-      link: "/enlaces-rapidos/faqs",
+      id: 4,
+      title: "Política de Cookies",
+      link: "/footer/politica-de-cookies",
     },
   ],
-  support: [
-    // {
-    //   id: 1,
-    //   title: "Centro de ayuda",
-    //   link: "/apoyo/centro-de-ayuda",
-    // },
-    // {
-    // 	id: 2,
-    // 	title: "Management",
-    // 	link: "/management",
-    // },
-    {
-      id: 1,
-      title: "política de privacidad",
-      link: "/apoyo/politica-de-privacidad",
-    },
-  ],
+  // "Política de Privacidad": [
+  //   {
+  //     id: 1,
+  //     title: "Política de Privacidad",
+  //     link: "/enlaces-rapidos/faqs",
+  //   },
+  // ],
+  // "Condiciones de Uso": [
+  //   {
+  //     id: 1,
+  //     title: "Condiciones de Uso",
+  //     link: "/apoyo/politica-de-privacidad",
+  //   },
+  // ],
+  // "Política de Cookies": [
+  //   {
+  //     id: 1,
+  //     title: "Política de Cookies",
+  //     link: "/apoyo/politica-de-privacidad",
+  //   },
+  // ],
 };
 const StepsCardsData = [
   {

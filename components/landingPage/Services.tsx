@@ -51,13 +51,13 @@ export default function Services() {
 			</div>
 			<div className="pt-1 flex pr-6 justify-center">
 				<div className="col-8 w-4/4">
-					<h1 className="ml-6 font-bold text-2xl md:text-3xl text-center">
+					<h2 className="ml-6 font-bold text-2xl md:text-3xl text-center">
 						Selección de servicios según tus deseos:
 						<br />
 						<span className="text-orange text-center">
 							Descubre nuestras categorías de reparaciones y recibe ofertas gratuitas de artesanos
 						</span>
-					</h1>
+					</h2>
 				</div>
 			</div>
 			<AllServices />
