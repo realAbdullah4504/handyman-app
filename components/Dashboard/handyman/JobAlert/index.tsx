@@ -111,7 +111,7 @@ export default function JobAlerts() {
 			(item: any, index: any, self: any) =>
 				self?.findIndex((i: any) => i === item) === index
 		)
-		.filter((item: any) => !data.location.some((i: any) => i === item));
+		.filter((item: any) => !data?.location?.some((i: any) => i === item));
 
 	const handleUpdateDebounce = useDebounce((radius) => {
 		handleUpdate({ radius });

@@ -72,17 +72,13 @@ export default function Handyman({ params, dehydratedState }: any) {
           </title>
           <meta
             name="description"
-            content={`¿Estás buscando un ${changeServiceFormat(
+            content={`¿Estás buscando un ${changeServiceFormat(
               handyman
             )} en ${changeServiceFormat(
               city
-            )}? Nuestro servicio te permite descubrir fácilmente ${changeServiceFormat(
+            )}? Nuestro servicio te permite descubrir fácilmente ${changeServiceFormat(
               handyman
-            )} verificados en tu área. Compara reseñas de clientes y selecciona al profesional ideal para tus necesidades de ${changeServiceFormat(
-              handyman
-            )}. Obtén servicios de ${changeServiceFormat(
-              handyman
-            )} confiables y de alta calidad con facilidad.`}
+            )} verificados en tu área`}
           />{" "}
           {/*Short description more effective for SEO*/}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -110,14 +106,18 @@ export default function Handyman({ params, dehydratedState }: any) {
         </header>
         <div className="pt-32 bg-mainBackground">
           <section className="Container space-y-10 text-center mb-10">
-            <h1 className="text-3xl capitalize md:text-4xl font-bold">
+            <h2 className="text-3xl capitalize md:text-4xl font-bold">
               Encuentra {changeServiceFormat(handyman)} en{" "}
               <span className="text-orange">{changeServiceFormat(city)}</span>
-            </h1>
+            </h2>
             <p className="w-full lg:w-1/2 text-gray-600 text-left font-medium mx-auto">
-              ¿Estás buscando un {changeServiceFormat(handyman)} en{" "}
+              ¿Estás buscando un {changeServiceFormat(handyman)} en{" "}
               {changeServiceFormat(city)}? Nuestro servicio te permite descubrir
-              fácilmente {changeServiceFormat(handyman)} verificados en tu área
+              fácilmente {changeServiceFormat(handyman)} verificados en tu área.
+              Compara reseñas de clientes y selecciona al profesional ideal para
+              tus necesidades de {changeServiceFormat(handyman)}. Obtén
+              servicios de {changeServiceFormat(handyman)} confiables y de alta
+              calidad con facilidad.
             </p>
           </section>
           <Search params={params} />
