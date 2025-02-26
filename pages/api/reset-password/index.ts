@@ -47,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         // sending email to user
         let sendMailSailerOption = {
-          from: "'Handyman'<backenddatabase2023@gmail.com>",
+          from: "'Handyman'<info@oficios24.es>",
           to: `${email}`,
           subject: `Your password recently changed!`,
           html: `

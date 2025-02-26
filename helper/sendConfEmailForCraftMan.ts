@@ -4,7 +4,7 @@ export const sendMailSailerOptionForCraftman = (
 	craftsmanId: string,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<backenddatabase2023@gmail.com>",
+	from: "'Handyman'<info@oficios24.es>",
 	to: `${email}`,
 	subject: `Confirmación y Detalles de Inicio de Sesión para el Portal de Servicios Handyman`,
 	html: `<html>

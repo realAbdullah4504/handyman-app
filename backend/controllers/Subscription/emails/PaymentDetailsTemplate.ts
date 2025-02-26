@@ -10,7 +10,7 @@ export const sendBankDetailsEmail = (
 	const swiftCode = process.env.NEXT_PUBLIC_SWIFT_CODE as string;
 
 	return {
-		from: "'Handyman'<backenddatabase2023@gmail.com>",
+		from: "'Handyman'<info@oficios24.es>",
 		to: `${email}`,
 		subject: `Confirmación de Su Reserva de Suscripción`,
 		html: `

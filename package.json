@@ -12,7 +12,8 @@
     "siteMapsCraftsmanNearMe": "ts-node scripts/siteMapsCraftsmanNearMe.ts",
     "siteMapsCraftsmanProfiles": "ts-node scripts/siteMapsCraftsmanProfiles.ts",
     "siteMapsCuantoCuesta": "ts-node scripts/siteMapsCuantoCuesta.ts",
-    "siteMapsService": "ts-node scripts/siteMapsService.ts"
+    "siteMapsService": "ts-node scripts/siteMapsService.ts",
+    "sendEmail": "ts-node scripts/sendEmail.ts"
   },
   "dependencies": {
     "@google-cloud/translate": "^8.3.0",

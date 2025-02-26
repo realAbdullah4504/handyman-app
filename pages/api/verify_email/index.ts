@@ -72,7 +72,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 						$set: updateData,
 					});
 					await transporter.sendMail({
-						from: "'Handyman'<backenddatabase2023@gmail.com>",
+						from: "'Handyman'<info@oficios24.es>",
 						to: `${email}`,
 						subject: `Información: necesitar verificación de perfil`,
 						html: "<h1>Verificamos cuidadosamente su cuenta. No podrá realizar alguna acción hasta que verifique su perfil</h1",

@@ -6,7 +6,7 @@ export const sendPaymentReceivedEmail = (
   endDate: string
 ) => {
   return {
-    from: "'Handyman' <backenddatabase2023@gmail.com>",
+    from: "'Handyman' <info@oficios24.es>",
     to: `${email}`,
     subject: `¡Su Suscripción Ahora Está Activa!`,
     html: `

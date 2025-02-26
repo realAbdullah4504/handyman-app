@@ -118,7 +118,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 					console.log(`Attempting to send email to: ${i?.email}`);
 
 					await transporter.sendMail({
-						from: "Handyman<backenddatabase2023@gmail.com>",
+						from: "Handyman<info@oficios24.es>",
 						to: `${i?.email}`,
 						subject: `Handyman Subscription has expired.`,
 						html: template(i),

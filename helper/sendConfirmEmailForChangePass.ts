@@ -2,7 +2,7 @@ export const sendChangePassMail = (
 	user: any,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<backenddatabase2023@gmail.com>",
+	from: "'Handyman'<info@oficios24.es>",
 	to: `${user.email}`,
 	subject: `Confirmación: Cambio de Contraseña Exitoso`,
 	html: `

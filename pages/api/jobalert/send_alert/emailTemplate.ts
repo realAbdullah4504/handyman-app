@@ -5,7 +5,7 @@ export const sendJobAlert = (
 	otp: any,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<backenddatabase2023@gmail.com>",
+	from: "'Handyman'<info@oficios24.es>",
 	to: `${email}`,
 	subject: `¡Nueva Alerta de Trabajo!`,
 	html: `

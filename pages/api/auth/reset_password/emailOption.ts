@@ -3,7 +3,7 @@ export const sendResetPassMail = (
 	password: string,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<backenddatabase2023@gmail.com>",
+	from: "'Handyman'<info@oficios24.es>",
 	to: `${user.email}`,
 	subject: `Restablecer Contraseña`,
 	html: `
