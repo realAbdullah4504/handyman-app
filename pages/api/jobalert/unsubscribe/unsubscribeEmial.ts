@@ -3,7 +3,7 @@ export const sendUnsubscriptionConfirmation = (
     email: string,
     baseUrl: string = process.env.BASE_URL as string
   ) => ({
-    from: "'Handyman'<info@oficios24.es>",
+    from: `'Handyman'<${process.env.NEXT_PUBLIC_EMAIL}>`,
     to: `${email}`,
     subject: `Job Alert Unsubscription Confirmation`,
     html: `

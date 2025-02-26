@@ -2,7 +2,7 @@ export const sendChangePassMail = (
 	user: any,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<info@oficios24.es>",
+	from: `'Handyman'<${process.env.NEXT_PUBLIC_EMAIL}>`,
 	to: `${user.email}`,
 	subject: `Confirmación: Cambio de Contraseña Exitoso`,
 	html: `

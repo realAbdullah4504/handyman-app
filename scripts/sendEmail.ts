@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
     port: 465, // Use 465 for SSL, or 587 for TLS
     secure: true, // Set to true for SSL, false for TLS
     auth: {
-      user: "info@oficios24.es", // Your Namecheap email
-      pass: "handyman@", // Your email password
+      user: process.env.NEXT_PUBLIC_EMAIL, // Your Namecheap email
+      pass: process.env.NEXT_PUBLIC_PASS, // Your email password
     },
   });
 
@@ -15,7 +15,7 @@ const sendEmail = async () => {
   try {
     const email = "oficios24@outlook.com";
     const emailOptions = {
-      from: "'Handyman'<info@oficios24.es>",
+      from: `'Handyman'<${process.env.NEXT_PUBLIC_EMAIL}>`,
       to: `${email}`,
       subject: "Your password recently changed!",
       html: "<p class='desc'>Thank you for choosing Handyman.</p>",

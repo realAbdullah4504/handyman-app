@@ -3,7 +3,7 @@ export const sendMailSailerOption = (
 	password: string,
 	baseUrl: string = process.env.BASE_URL as string
 ) => ({
-	from: "'Handyman'<info@oficios24.es>",
+	from: `'Handyman'<${process.env.NEXT_PUBLIC_EMAIL}>`,
 	to: `${email}`,
 	subject: `Confirmación y Detalles de Inicio de Sesión para el Portal de Servicios Handyman`,
 	html: `

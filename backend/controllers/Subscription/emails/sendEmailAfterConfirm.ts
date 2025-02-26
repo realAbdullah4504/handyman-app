@@ -6,7 +6,7 @@ export const sendPaymentReceivedEmail = (
   endDate: string
 ) => {
   return {
-    from: "'Handyman' <info@oficios24.es>",
+    from: `'Handyman' <${process.env.NEXT_PUBLIC_EMAIL}>`,
     to: `${email}`,
     subject: `¡Su Suscripción Ahora Está Activa!`,
     html: `

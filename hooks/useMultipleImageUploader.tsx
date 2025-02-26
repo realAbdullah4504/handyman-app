@@ -60,11 +60,11 @@ const useImageUploader = (): ImageUploaderResult => {
 
 				// Append each file with the name "file"
 				imageFormData.append("file", file);
-				imageFormData.append("upload_preset", "x0ooef7r");
-				imageFormData.append("cloud_name", "dv9vv9ju7");
+				imageFormData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
+				imageFormData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
 
 				const response = await fetch(
-					"https://api.cloudinary.com/v1_1/dv9vv9ju7/image/upload",
+					process.env.NEXT_PUBLIC_CLOUDINARY_URL,
 					{
 						method: "POST",
 						body: imageFormData,
