@@ -14,24 +14,27 @@ const useOnChangeUploadImages = () => {
       // console.log(isImgUploading, "loading state");
       const imageFormData = new FormData();
       imageFormData.append("file", files[0]);
-      imageFormData.append(
-        "upload_preset",
-        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-      );
-      imageFormData.append(
-        "cloud_name",
-        process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-      );
+
+      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      const cloudinaryUrl = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
+
+      if (!uploadPreset || !cloudName || !cloudinaryUrl) {
+        throw new Error("Cloudinary configuration is missing");
+      }
+      imageFormData.append("upload_preset", uploadPreset);
+      imageFormData.append("cloud_name", cloudName);
+
       // saving to cloudinary
       setIsImgUploading(true);
       try {
-        await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_URL, {
+        await fetch(cloudinaryUrl, {
           method: "POST",
           body: imageFormData,
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             image = data;
             setImagePageData([...imageDataPageData, data.secure_url]);
 

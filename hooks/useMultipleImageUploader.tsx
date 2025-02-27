@@ -2,110 +2,115 @@ import React, { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 interface ImageUploaderResult {
-	selectedFiles: File[];
-	base64Images: { file: File; base64: string }[];
-	handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-	handleUploadImages: Function;
-	isUploading: boolean;
-	uploadedImages: string[];
-	setBase64Images: React.Dispatch<
-		React.SetStateAction<{ file: File; base64: string }[]>
-	>;
+  selectedFiles: File[];
+  base64Images: { file: File; base64: string }[];
+  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleUploadImages: Function;
+  isUploading: boolean;
+  uploadedImages: string[];
+  setBase64Images: React.Dispatch<
+    React.SetStateAction<{ file: File; base64: string }[]>
+  >;
 }
 
 const useImageUploader = (): ImageUploaderResult => {
-	const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-	const [base64Images, setBase64Images] = useState<
-		{ file: File; base64: string }[]
-	>([]);
-	const [uploadedImages, setUploadedImages] = useState<string[]>([]);
-	const [isUploading, setIsUploading] = useState(false);
-	const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const files = event.target.files;
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [base64Images, setBase64Images] = useState<
+    { file: File; base64: string }[]
+  >([]);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
 
-		if (files) {
-			const newFiles: File[] = Array.from(files);
-			setSelectedFiles([...selectedFiles, ...newFiles]);
+    if (files) {
+      const newFiles: File[] = Array.from(files);
+      setSelectedFiles([...selectedFiles, ...newFiles]);
 
-			const promises: Promise<{ file: File; base64: string }>[] =
-				newFiles.map((file) => {
-					return new Promise((resolve) => {
-						const reader = new FileReader();
-						reader.onloadend = () => {
-							resolve({ file, base64: reader.result as string });
-						};
-						reader.readAsDataURL(file);
-					});
-				});
+      const promises: Promise<{ file: File; base64: string }>[] = newFiles.map(
+        (file) => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              resolve({ file, base64: reader.result as string });
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+      );
 
-			Promise.all(promises).then((base64Array) => {
-				setBase64Images([...base64Images, ...base64Array]);
-			});
-		}
-	};
+      Promise.all(promises).then((base64Array) => {
+        setBase64Images([...base64Images, ...base64Array]);
+      });
+    }
+  };
 
-	const handleUploadImages = async (files: FileList | []) => {
-		if (!files || files.length === 0) {
-			return null;
-		}
+  const handleUploadImages = async (files: FileList | []) => {
+    if (!files || files.length === 0) {
+      return null;
+    }
 
-		setIsUploading(true);
+    setIsUploading(true);
 
-		const toastId = toast.loading("Subiendo ...");
-		const uploadedImages: string[] = [];
-		try {
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				const imageFormData = new FormData();
+    const toastId = toast.loading("Subiendo ...");
+    const uploadedImages: string[] = [];
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const imageFormData = new FormData();
+        const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+        const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+		const cloudinaryUrl = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
 
-				// Append each file with the name "file"
-				imageFormData.append("file", file);
-				imageFormData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
-				imageFormData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+        if (!uploadPreset || !cloudName || !cloudinaryUrl) {
+          throw new Error("Cloudinary configuration is missing");
+        }
 
-				const response = await fetch(
-					process.env.NEXT_PUBLIC_CLOUDINARY_URL,
-					{
-						method: "POST",
-						body: imageFormData,
-					}
-				);
+        // Append each file with the name "file"
+        imageFormData.append("file", file);
+        imageFormData.append("upload_preset", uploadPreset);
+        imageFormData.append("cloud_name", cloudName);
 
-				const data = await response.json();
+        const response = await fetch(cloudinaryUrl, {
+          method: "POST",
+          body: imageFormData,
+        });
 
-				if (data.error) {
-					toast.error(data?.error?.message);
-					setIsUploading(false);
-					return null;
-				}
+        const data = await response.json();
 
-				const imageUrl = data.secure_url;
-				uploadedImages.push(imageUrl);
-			}
+        if (data.error) {
+          toast.error(data?.error?.message);
+          setIsUploading(false);
+          return null;
+        }
 
-			setUploadedImages(uploadedImages);
-			setIsUploading(false);
-			toast.dismiss(toastId);
-			setBase64Images([]);
-			return uploadedImages;
-		} catch (error) {
-			console.error(error);
-			toast.error("Error de carga de imágenes.Por favor intente de nuevo.");
-			setIsUploading(false);
-			toast.dismiss(toastId);
-			return null;
-		}
-	};
+        const imageUrl = data.secure_url;
+        uploadedImages.push(imageUrl);
+      }
 
-	return {
-		selectedFiles,
-		base64Images,
-		handleFileChange,
-		handleUploadImages,
-		isUploading,
-		uploadedImages,
-		setBase64Images,
-	};
+      setUploadedImages(uploadedImages);
+      setIsUploading(false);
+      toast.dismiss(toastId);
+      setBase64Images([]);
+      return uploadedImages;
+    } catch (error) {
+      console.error(error);
+      toast.error("Error de carga de imágenes.Por favor intente de nuevo.");
+      setIsUploading(false);
+      toast.dismiss(toastId);
+      return null;
+    }
+  };
+
+  return {
+    selectedFiles,
+    base64Images,
+    handleFileChange,
+    handleUploadImages,
+    isUploading,
+    uploadedImages,
+    setBase64Images,
+  };
 };
 
 export default useImageUploader;
