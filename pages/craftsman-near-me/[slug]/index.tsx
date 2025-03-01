@@ -41,11 +41,13 @@ const DynamicPage = ({ slug }: DynamicPageProps) => {
         <h1 className="text-3xl font-bold text-center mt-8">
           {title}
         </h1>
+        <div className="mb-12">
         <HeroSearchAndText
           homePageOrNOt={false}
           title={false}
           searchDefaultField={changeServiceFormat(slug)}
         />
+        </div>
         <Component searchDefaultField={changeServiceFormat(slug)} />
       </StaticPagesLayout>
       {/* changeServiceFormat( */}

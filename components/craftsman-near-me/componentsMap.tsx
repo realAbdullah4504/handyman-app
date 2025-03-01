@@ -106,7 +106,7 @@ export const components: ComponentMap = {
     Component: FindInteriorDecoratorsNearby,
     title: "Encuentra Decoradores de Interiores Cerca de Ti",
   },
-  "diseñadores-de-interiores":
+  "azulejeros":
   {
     Component: FindInteriorDesignersNearby,
     title: "Encuentra Diseñadores de Interiores Cerca de Ti",

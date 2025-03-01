@@ -160,12 +160,12 @@ const ServiceCards = [
     shortText: "Instaladoras de calefacción",
     slug: "instaladoras-de-calefacción",
   },
-  {
-    id: 20,
-    icon: "/ServicesIcon/interior-designers.svg",
-    shortText: "Diseñadores de interiores",
-    slug: "diseñadores-de-interiores",
-  },
+  // {
+  //   id: 20,
+  //   icon: "/ServicesIcon/interior-designers.svg",
+  //   shortText: "Diseñadores de interiores",
+  //   slug: "diseñadores-de-interiores",
+  // },
   {
     id: 21,
     icon: "/ServicesIcon/interior-decorators.svg",
@@ -256,12 +256,12 @@ const ServiceCards = [
     shortText: "Azulejeros",
     slug: "azulejeros",
   },
-  {
-    id: 36,
-    icon: "/ServicesIcon/transport-companies.svg",
-    shortText: "Empresas de transporte",
-    slug: "empresas-de-transporte",
-  },
+  // {
+  //   id: 36,
+  //   icon: "/ServicesIcon/transport-companies.svg",
+  //   shortText: "Empresas de transporte",
+  //   slug: "empresas-de-transporte",
+  // },
   {
     id: 37,
     icon: "/ServicesIcon/well-builders.svg",
@@ -298,7 +298,7 @@ const CraftManData = [
   {
     id: 3,
     name: "Lucía",
-    job: "Diseñadora de interiores",
+    job: "azulejeros",
     img: "/CraftsmanImg/Craftsman3.webp",
   },
   {
