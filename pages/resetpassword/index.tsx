@@ -83,7 +83,7 @@ export default function ResetPassword() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_BASE_URL}/resetpassword`} />
-        <link rel="icon" href="/favicon.ico" />
+        
       </Head>
       <main className="py-8 md:py-12 lg:py-16 xl:py-20">
         <section className="flex flex-col gap-5 md:gap-8 lg:gap-10 2xl:gap-12 justify-center items-center max-w-xs md:max-w-sm lg:max-w-md 2xl:max-w-lg h-[70vh] mx-auto">

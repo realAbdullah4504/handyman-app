@@ -84,7 +84,7 @@ export default function Handyman({ params, dehydratedState }: any) {
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_BASE_URL}/findhandyman/${handyman}?city=${city}`}
         />
-        <link rel="icon" href="/favicon.ico" />
+        
       </Head>
       <header className="flex justify-between items-center bg-white shadow-lg px-5 py-6 w-full fixed z-50 left-0 right-0 top-0">
         <div className="Container">

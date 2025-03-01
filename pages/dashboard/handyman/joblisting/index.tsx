@@ -77,7 +77,7 @@ export default function Index() {
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_BASE_URL}/joblisting`}
         />
-        <link rel="icon" href="/favicon.ico" />
+        
       </Head>
 
       <HandymanLayout>

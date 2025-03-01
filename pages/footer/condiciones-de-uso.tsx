@@ -7,7 +7,7 @@ const CondicionesDeUso: NextPage = () => {
     <Header/>
     <div className="container mx-auto pt-12 px-6">
       <h1 className="text-2xl font-bold">Condiciones de Uso</h1>
-      <p>Última actualización: [Fecha]</p>
+      {/* <p>Última actualización: [Fecha]</p> */}
       <p>El uso de Oficios24.es implica la aceptación de los siguientes términos y condiciones.</p>
       <p>1. Oficios24.es es una plataforma que conecta a usuarios con profesionales del sector de la construcción y servicios.</p>
       <p>2. Los usuarios deben registrarse proporcionando información veraz y mantener la confidencialidad de sus credenciales de acceso.</p>

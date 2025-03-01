@@ -85,7 +85,7 @@ export default function Profile({
         rel="canonical"
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/craftsman/${profile}`}
       />
-      <link rel="icon" href="/favicon.ico" />
+      
     </Head>
     {false ? (
       <Loader />

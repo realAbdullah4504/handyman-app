@@ -13,7 +13,7 @@ export default function JobDetails() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="#" />
-        <link rel="icon" href="/favicon.ico" />
+        
       </Head>
       {/* <header className="white flex justify-between items-center bg-white shadow-lg px-5 py-6 z-50">
         <div className="Container">

@@ -8,7 +8,7 @@ export default function Index() {
         <title>Admin | Statistics and Analytics</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex, nofollow" />
-        <link rel="icon" href="/favicon.ico" />
+        
         <link rel="canonical" href={`${process.env.NEXT_PUBLIC_BASE_URL}/statisticsandanalytics`} />
       </Head>
       <AdminDashBoard>
