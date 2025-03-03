@@ -5,7 +5,7 @@ const AvisoLegal: NextPage = () => {
   return (
     <>
     <Header/>
-    <div className="container mx-auto pt-12 px-6">
+    <div className="container mx-auto pt-16 px-6">
       <h1 className="text-2xl font-bold">Aviso Legal</h1>
       <p>Nombre de la empresa: Oficios24 SL</p>
       <p>Dirección: Giuseppe Licopoli, Neuenkamperstr 32, 42657 Solingen, Alemania</p>

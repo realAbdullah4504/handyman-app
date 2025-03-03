@@ -5,7 +5,7 @@ const PoliticaDePrivacidad: NextPage = () => {
   return (
     <>
       <Header />
-      <div className="container mx-auto pt-12 px-6">
+      <div className="container mx-auto pt-16 px-6">
         <h1 className="text-2xl font-bold">Política de Privacidad</h1>
         <p>Última actualización: [Fecha]</p>
         <p>

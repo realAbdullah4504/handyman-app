@@ -210,13 +210,13 @@ const ServiceCards = [
   },
   {
     id: 28,
-    icon: "/ServicesIcon/pool-builders.svg",
+    icon: "/ServicesIcon/piscina.svg",
     shortText: "Constructores de piscinas",
     slug: "constructores-de-piscinas",
   },
   {
     id: 29,
-    icon: "/ServicesIcon/painters-decorators.svg",
+    icon: "/ServicesIcon/pintores.svg",
     shortText: "Pintores y decoradores",
     slug: "pintores-y-decoradores",
   },
