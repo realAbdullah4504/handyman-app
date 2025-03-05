@@ -64,9 +64,9 @@ export default function Header() {
               <>
                 <Link href={NavLinks[0].url} title={NavLinks[0].linkTitle}>
                   <Image
-                    src="/oficios24.png"
-                    width={80}
-                    height={50}
+                    src="/oficios24.svg"
+                    width={89}
+                    height={27}
                     className="max-w-[100px]"
                     alt="Logo"
                   />

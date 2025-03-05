@@ -4,9 +4,9 @@ const PoliticaDeCookies: NextPage = () => {
     return (
       <>
     <Header/>
-      <div className="container mx-auto pt-16 px-6">
+      <div className="container mx-auto pt-[95px] pb-[10px] px-6">
         <h1 className="text-2xl font-bold">Política de Cookies</h1>
-        <p>Última actualización: [Fecha]</p>
+        {/* <p>Última actualización: [Fecha]</p> */}
         <p>Oficios24.es utiliza cookies para mejorar su experiencia de navegación y personalizar el contenido del sitio web.</p>
         <p>Las cookies son pequeños archivos de texto almacenados en su navegador que permiten recordar sus preferencias y mejorar la navegación.</p>
         <p>Tipos de cookies que utilizamos:</p>
